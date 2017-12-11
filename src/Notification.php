@@ -15,6 +15,11 @@ class Notification implements \JsonSerializable
     private $clickAction;
     private $tag;
 
+    private $bodyLocKey;
+    private $bodyLocArgs;
+    private $titleLocKey;
+    private $titleLocArgs;
+
     public function __construct($title, $body)
     {
         $this->title = $title;
@@ -128,6 +133,46 @@ class Notification implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @param string $bodyLocKey
+     * @return $this
+     */
+    public function setBodyLocKey($bodyLocKey)
+    {
+        $this->bodyLocKey = $bodyLocKey;
+        return $this;
+    }
+
+    /**
+     * @param array $bodyLocArgs
+     * @return $this
+     */
+    public function setBodyLocArgs($bodyLocArgs)
+    {
+        $this->bodyLocArgs = $bodyLocArgs;
+        return $this;
+    }
+
+    /**
+     * @param string $titleLocKey
+     * @return $this
+     */
+    public function setTitleLocKey($titleLocKey)
+    {
+        $this->titleLocKey = $titleLocKey;
+        return $this;
+    }
+
+    /**
+     * @param array $titleLocArgs
+     * @return $this
+     */
+    public function setTitleLocArgs($titleLocArgs)
+    {
+        $this->titleLocArgs = $titleLocArgs;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         $jsonData = array();
@@ -155,6 +200,19 @@ class Notification implements \JsonSerializable
         }
         if ($this->tag) {
             $jsonData['tag'] = $this->tag;
+        }
+
+        if ($this->bodyLocKey) {
+            $jsonData['body_loc_key'] = $this->bodyLocKey;
+        }
+        if ($this->bodyLocArgs) {
+            $jsonData['body_loc_args'] = $this->bodyLocArgs;
+        }
+        if ($this->titleLocKey) {
+            $jsonData['title_loc_key'] = $this->titleLocKey;
+        }
+        if ($this->titleLocArgs) {
+            $jsonData['title_loc_args'] = $this->titleLocArgs;
         }
 
         return $jsonData;
